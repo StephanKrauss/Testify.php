@@ -4,7 +4,7 @@ require '../vendor/autoload.php';
 
 use Testify\Testify;
 
-$tf = new Testify("Testify test himself");
+$tf = new Testify("Bla Test");
 $test = new Testify("//");
 
 $tf->before(function($tf) use($test) {

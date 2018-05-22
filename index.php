@@ -4,7 +4,7 @@ require 'vendor/autoload.php';
 
 use Testify\Testify;
 
-$tf = new Testify("My test suite");
+$tf = new Testify("erster Test");
 
 // add a test case
 $tf->test("Some tests", function($tf)
@@ -24,3 +24,5 @@ $tf->test(function($tf)
 });
 
 $tf(); // run all tests
+
+$test = 123;

@@ -119,7 +119,7 @@ class Testify {
      *
      * @return $this
      */
-    public function run()
+    public function run($type = false)
     {
         $arr = array($this);
 
@@ -146,7 +146,7 @@ class Testify {
             call_user_func_array($this->after, $arr);
         }
 
-        $this->report();
+		$this->report($type);
 
         return $this;
     }
@@ -305,19 +305,29 @@ class Testify {
      *
      * @return $this
      */
-    public function report()
+    public function report($type)
     {
         $title = $this->suiteTitle;
         $suiteResults = $this->suiteResults;
         $cases = $this->stack;
 
-        if (php_sapi_name() === 'cli') {
-            include dirname(__FILE__) . '/testify.report.cli.php';
-        } else {
-            include dirname(__FILE__) . '/testify.report.html.php';
-        }
+        if($type === false){
+			include dirname(__FILE__) . '/testify.report.html.php';
 
-        return $this;
+			return $this;
+		}
+        else{
+			// include dirname(__FILE__) . '/testify.report.cli.php';
+
+			$failure = 0;
+
+			foreach($this->stack as $myTest){
+				$failure += $myTest['fail'];
+			}
+
+			echo $failure;
+			exit();
+		}
     }
 
     /**
@@ -330,9 +340,8 @@ class Testify {
      */
     private function recordTest($pass, $message = '')
     {
-        if (!array_key_exists($this->currentTestCase, $this->stack) ||
-              !is_array($this->stack[$this->currentTestCase])) {
-
+        if (!array_key_exists($this->currentTestCase, $this->stack) || !is_array($this->stack[$this->currentTestCase]))
+        {
             $this->stack[$this->currentTestCase]['tests'] = array();
             $this->stack[$this->currentTestCase]['pass'] = 0;
             $this->stack[$this->currentTestCase]['fail'] = 0;
