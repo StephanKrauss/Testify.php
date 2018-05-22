@@ -10,7 +10,7 @@ str_repeat('-', 80)."\n",
 foreach($cases as $caseTitle => $case) {
   echo
 	"\n".str_repeat('-', 80)."\n",
-	"[$result]  $caseTitle  {pass {$case['pass']} / fail {$case['fail']}}\n\n";
+	"Test: '$caseTitle'  {richtig: {$case['pass']} / falsch: {$case['fail']}}\n\n";
 
 	foreach ($case['tests'] as $test) {
 		echo

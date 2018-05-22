@@ -5,7 +5,7 @@ require '../vendor/autoload.php';
 use Testify\Testify;
 use App\Controller\Login\LoginController;
 
-$tf = new Testify("LoginException");
+$tf = new Testify("LoginControllerTest");
 $loginController = new LoginController();
 
 $loginController->setData(array(4,5,6));
@@ -16,9 +16,9 @@ $tf->beforeEach(function($tf) use($loginController) {
 
 $tf->test("test1", function($tf) use($loginController)
 {
-	$tf->assertTrue($loginController->insert(), 'Vergleich');
+	$tf->assertTrue($loginController->insert(), 'Vergleich true');
 
-	$tf->assertEquals($loginController->insert(),'abc'. 'mein Test');
+	$tf->assertEquals($loginController->insert(),'abc'. 'Vergleich abc');
 
 	$test = $loginController->getData();
 });
@@ -43,4 +43,4 @@ $tf->test("Exception abfangen", function($tf) use($loginController)
 });
 
 
-$tf->run();
+$tf->run(true);

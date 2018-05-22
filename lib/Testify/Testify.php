@@ -119,7 +119,7 @@ class Testify {
      *
      * @return $this
      */
-    public function run($type = false)
+    public function run($htmlView = false)
     {
         $arr = array($this);
 
@@ -146,7 +146,7 @@ class Testify {
             call_user_func_array($this->after, $arr);
         }
 
-		$this->report($type);
+		$this->report($htmlView);
 
         return $this;
     }
@@ -305,28 +305,20 @@ class Testify {
      *
      * @return $this
      */
-    public function report($type)
+    public function report($htmlView)
     {
         $title = $this->suiteTitle;
         $suiteResults = $this->suiteResults;
         $cases = $this->stack;
 
-        if($type === false){
+		if ($htmlView !== true) {
+			// include dirname(__FILE__) . '/testify.report.cli.php';
+			echo 1;
+		}
+		else {
 			include dirname(__FILE__) . '/testify.report.html.php';
 
 			return $this;
-		}
-        else{
-			// include dirname(__FILE__) . '/testify.report.cli.php';
-
-			$failure = 0;
-
-			foreach($this->stack as $myTest){
-				$failure += $myTest['fail'];
-			}
-
-			echo $failure;
-			exit();
 		}
     }
 
