@@ -213,6 +213,19 @@ class Testify {
         return $this->recordTest(false, $message);
     }
 
+	/**
+	 * prüft ob ein Array vorliegt
+	 *
+	 * @param $arg
+	 * @param $message
+	 *
+	 * @return bool
+	 */
+    public function assertIsArray($arg, $message)
+	{
+		return $this->recordTest(is_array($arg), $message);
+	}
+
     /**
      * Passes if $arg1 == $arg2.
      *

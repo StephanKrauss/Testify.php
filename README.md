@@ -65,6 +65,8 @@ $tf();
  * `assertNotSame( mixed $arg1, mixed $arg2, string [string $message = ''] )` - Passes if $arg1 !== $arg2
  * `assertInArray( mixed $arg, array $arr, string [string $message = ''] )` - Passes if $arg is an element of $arr
  * `assertNotInArray( mixed $arg, array $arr, string [string $message = ''] )` - Passes if $arg is not an element of $arr
+ + `assertException( object $object, string $arg2, [string $message = ''] )` - Passes if method of object throw exception
+ + `assertIsArray( array $arg1, [string $message = ''] )` - Passes if $arg1 is array
  * `pass( string [string $message = ''] )` - Unconditional pass
  * `fail( string [string $message = ''] )` - Unconditional fail
  * `report( )` - Generates a pretty CLI or HTML5 report of the test suite status. Called implicitly by run()

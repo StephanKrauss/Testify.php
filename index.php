@@ -1,16 +1,17 @@
 <?php
 
 require 'vendor/autoload.php';
+require_once('src/container.php');
 
 use Testify\Testify;
 
 $tf = new Testify();
 
-$container = new stdClass();
-
-$tf->before(function() use(&$container)
+$tf->before(function() use($container)
 {
-    $container->bla = new App\Controller\Login\LoginController();
+	/** @var  $controller App\Controller\Login\LoginController */
+	$controller = $container[App\Controller\Login\LoginController::class];
+	$controller->setData(['aa','bb','cc']);
 });
 
 // add a test case
@@ -32,8 +33,12 @@ $tf->test(__FILE__,function($tf)
 
 $tf->test(__FILE__, function($tf) use($container)
 {
-    $tf->assertException($loginController, 'wert', 'Test einer Exception');
-    $test = 123;
+	/** @var  $controller App\Controller\Login\LoginController */
+	$controller = $container[App\Controller\Login\LoginController::class];
+
+    $tf->assertException($controller, 'wert', 'Test einer Exception');
+
+    $tf->assertIsArray($controller->getData(), 'Kontrolle Array');
 });
 
 $tf->run(true);
