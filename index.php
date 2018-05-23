@@ -32,11 +32,9 @@ $tf->test(__FILE__,function($tf)
 
 $tf->test(__FILE__, function($tf) use($container)
 {
-    // $tf->assertException($loginController, 'wert', 'Test einer Exception');
+    $tf->assertException($loginController, 'wert', 'Test einer Exception');
     $test = 123;
 });
-
-// $tf(true); // run all tests
 
 $tf->run(true);
 
