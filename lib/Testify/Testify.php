@@ -42,9 +42,11 @@ class Testify {
      *
      * @param string $title The suite title
      */
-    public function __construct($title)
+    public function __construct($title = false)
     {
-        $this->suiteTitle = $title;
+        if(!empty($title))
+            $this->suiteTitle = $title;
+
         $this->data = new \StdClass;
         $this->suiteResults = array('pass' => 0, 'fail' => 0);
     }
@@ -189,6 +191,26 @@ class Testify {
     public function assertFalse($arg, $message = '')
     {
         return $this->recordTest($arg == false, $message);
+    }
+
+    /**
+     * die Methode des zu überprüfenden Objectes gibt eine Exception zurück
+     *
+     * @param $testClass
+     * @param $testMethod
+     * @param $message
+     *
+     * @return bool
+     */
+    public function assertException($testClass, $testMethod, $message){
+        try{
+            $testClass->$testMethod();
+        }
+        catch(\Throwable $e){
+           return $this->recordTest(true, $message);
+        }
+
+        return $this->recordTest(false, $message);
     }
 
     /**

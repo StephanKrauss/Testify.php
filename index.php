@@ -4,25 +4,40 @@ require 'vendor/autoload.php';
 
 use Testify\Testify;
 
-$tf = new Testify("erster Test");
+$tf = new Testify();
+
+$container = new stdClass();
+
+$tf->before(function() use(&$container)
+{
+    $container->bla = new App\Controller\Login\LoginController();
+});
 
 // add a test case
-$tf->test("Some tests", function($tf)
+$tf->test(__FILE__, function($tf)
 {
-    $tf->assert(true);
+    $tf->assert(true, 'einfacher Test');
     $tf->assertFalse(!true);
-    $tf->assertEquals(1337, '1337');
+    $tf->assertEquals(1337, '1338');
 	$tf->assertNotEquals(array('a', 'b', 'c'), array('a', 'c', 'd'), "Not the same order");
     $tf->assertEquals(new stdClass, new stdClass, "Classes are equals");
 });
 
-$tf->test(function($tf)
+$tf->test(__FILE__,function($tf)
 {
     $tf->assert(true, "Always true !");
     $tf->assertSame(1024, pow(2, 10));
     $tf->assertNotSame(new stdClass, new stdClass, "Not the same classes !");
 });
 
-$tf(); // run all tests
+$tf->test(__FILE__, function($tf) use($container)
+{
+    // $tf->assertException($loginController, 'wert', 'Test einer Exception');
+    $test = 123;
+});
+
+// $tf(true); // run all tests
+
+$tf->run(true);
 
 $test = 123;
