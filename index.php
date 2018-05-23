@@ -19,7 +19,7 @@ $tf->test(__FILE__, function($tf)
 {
     $tf->assert(true, 'einfacher Test');
     $tf->assertFalse(!true);
-    $tf->assertEquals(1337, '1338');
+    $tf->assertEquals(1337, '1337');
 	$tf->assertNotEquals(array('a', 'b', 'c'), array('a', 'c', 'd'), "Not the same order");
     $tf->assertEquals(new stdClass, new stdClass, "Classes are equals");
 });
@@ -39,8 +39,8 @@ $tf->test(__FILE__, function($tf) use($container)
     $tf->assertException($controller, 'wert', 'Test einer Exception');
 
     $tf->assertIsArray($controller->getData(), 'Kontrolle Array');
+
+    $tf->assertRegExpr("^([0-9]+)([a-z]+)$", '1235456987452sdfsdWECDsdfsd111', 'Test RegEx');
 });
 
 $tf->run(true);
-
-$test = 123;

@@ -214,6 +214,23 @@ class Testify {
     }
 
 	/**
+	 * prüft einen regulären Ausdruck
+	 *
+	 * @param $regEx
+	 * @param $arg
+	 * @param $message
+	 *
+	 * @return bool
+	 */
+    public function assertRegExpr($pattern, $string, $message)
+	{
+		$pattern = "/".$pattern."/i";
+		$test = preg_match($pattern,$string);
+
+		return $this->recordTest($test, $message);
+	}
+
+	/**
 	 * prüft ob ein Array vorliegt
 	 *
 	 * @param $arg
@@ -347,8 +364,19 @@ class Testify {
         $cases = $this->stack;
 
 		if ($htmlView !== true) {
-			// include dirname(__FILE__) . '/testify.report.cli.php';
-			echo 1;
+			$errors = 0;
+			foreach($this->stack as $file => $stackValue){
+				$errors += $stackValue['fail'];
+			}
+
+			if($errors > 0){
+				include dirname(__FILE__) . '/testify.report.cli.php';
+
+				return $this;
+			}
+			else
+				echo $errors;
+
 		}
 		else {
 			include dirname(__FILE__) . '/testify.report.html.php';
