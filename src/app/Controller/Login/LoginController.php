@@ -43,4 +43,18 @@
 		{
 			throw new LoginException('Exception', 3);
 		}
+
+		/**
+		 * @return array
+		 */
+		public function response()
+		{
+			$response = [
+				['aaa','bbb','ccc'],
+				['ddd','eee'.'fff'],
+				['ggg','hhh','iii']
+			];
+
+			return $response;
+		}
 	}

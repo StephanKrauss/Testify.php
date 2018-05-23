@@ -5,7 +5,8 @@
     "keywords": ["unit", "testing", "framework"],
     "license": "GPL",
     "require": {
-        "pimple/pimple": "^3.0"
+        "pimple/pimple": "^3.0",
+        "justinrainbow/json-schema": "^5.2"
     },
     "autoload": {
         "psr-4" : {

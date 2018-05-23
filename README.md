@@ -66,6 +66,7 @@ $tf();
  * `assertInArray( mixed $arg, array $arr, string [string $message = ''] )` - Passes if $arg is an element of $arr
  * `assertNotInArray( mixed $arg, array $arr, string [string $message = ''] )` - Passes if $arg is not an element of $arr
  + `assertException( object $object, string $arg2, [string $message = ''] )` - Passes if method of object throw exception
+ + `assertRegExpr( string $pattern, string $arg1, [string $message = ''] )` - Passes if RegEx match String
  + `assertIsArray( array $arg1, [string $message = ''] )` - Passes if $arg1 is array
  * `pass( string [string $message = ''] )` - Unconditional pass
  * `fail( string [string $message = ''] )` - Unconditional fail

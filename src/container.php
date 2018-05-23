@@ -3,6 +3,12 @@
 
 	$container = new Pimple\Container();
 
-	$container[App\Controller\Login\LoginController::class] = function($container){
+	$container[App\Controller\Login\LoginController::class] = function($c)
+	{
 		return new App\Controller\Login\LoginController();
+	};
+
+	$container[JsonSchema\Validator::class] = function($c)
+	{
+		return new JsonSchema\Validator();
 	};

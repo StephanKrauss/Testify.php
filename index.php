@@ -40,7 +40,39 @@ $tf->test(__FILE__, function($tf) use($container)
 
     $tf->assertIsArray($controller->getData(), 'Kontrolle Array');
 
-    $tf->assertRegExpr("^([0-9]+)([a-z]+)$", '1235456987452sdfsdWECDsdfsd111', 'Test RegEx');
+    $tf->assertRegExpr("^([0-9]+)([a-z]+)$", '1235456987452sdfsdWECDsdfsd1', 'Test RegEx');
+});
+
+$tf->test(__FILE__, function($tf) use($container)
+{
+	/** @var $jsonValidator JsonSchema\Validator */
+	$jsonValidator = $container[JsonSchema\Validator::class];
+
+	/** @var  $controller App\Controller\Login\LoginController */
+	// $controller = $container[App\Controller\Login\LoginController::class];
+	// $test = $controller->response();
+
+	$jsonResponse = '{
+  		"blah": "foobar",
+  		"foo": "bar"
+	}';
+
+	$schema='{
+	  "type": "object",
+	  "properties": {
+	    "blah": {
+	      "type": "string"
+	    },
+	    "version": {
+	      "type": "string",
+	      "default": "v1.0.0"
+	    }
+	  }
+	}';
+
+	$jsonValidator->validate($jsonResponse, $schema);
+
+	$tf->assertTrue($jsonValidator->isValid(),'Test JSON Response');
 });
 
 $tf->run(true);
