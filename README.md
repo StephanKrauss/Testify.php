@@ -72,4 +72,6 @@ $tf();
  * `fail( string [string $message = ''] )` - Unconditional fail
  * `report( )` - Generates a pretty CLI or HTML5 report of the test suite status. Called implicitly by run()
  * `__invoke( )` - Alias for run() method
+ 
+ See examoles in file *'index.php'*
 
