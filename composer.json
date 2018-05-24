@@ -6,7 +6,7 @@
     "license": "GPL",
     "require": {
         "pimple/pimple": "^3.0",
-        "justinrainbow/json-schema": "^5.2"
+        "webmozart/json": "^1.2"
     },
     "autoload": {
         "psr-4" : {

@@ -49,12 +49,12 @@
 		 */
 		public function response()
 		{
-			$response = [
+			$table = [
 				['aaa','bbb','ccc'],
-				['ddd','eee'.'fff'],
-				['ggg','hhh','iii']
+				['ddd','eee','fff'],
+				['ggg','hhh',123]
 			];
 
-			return $response;
+			return $table;
 		}
 	}

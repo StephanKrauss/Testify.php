@@ -3,6 +3,10 @@
 require 'vendor/autoload.php';
 require_once('src/container.php');
 
+	use Webmozart\Json\JsonDecoder;
+	use Webmozart\Json\JsonValidator;
+	use Webmozart\Json\ValidationFailedException;
+
 use Testify\Testify;
 
 $tf = new Testify();
@@ -45,34 +49,31 @@ $tf->test(__FILE__, function($tf) use($container)
 
 $tf->test(__FILE__, function($tf) use($container)
 {
-	/** @var $jsonValidator JsonSchema\Validator */
-	$jsonValidator = $container[JsonSchema\Validator::class];
+	/** @var $controller App\Controller\Login\LoginController */
+	// $controller = new App\Controller\Login\LoginController();
+	// $data = $controller->response();
 
-	/** @var  $controller App\Controller\Login\LoginController */
-	// $controller = $container[App\Controller\Login\LoginController::class];
-	// $test = $controller->response();
+	try{
+		// $decoder = new JsonDecoder();
+		$validator = new JsonValidator();
 
-	$jsonResponse = '{
-  		"blah": "foobar",
-  		"foo": "bar"
-	}';
+		$controller = new App\Controller\Login\LoginController();
+		$data = $controller->response();
 
-	$schema='{
-	  "type": "object",
-	  "properties": {
-	    "blah": {
-	      "type": "string"
-	    },
-	    "version": {
-	      "type": "string",
-	      "default": "v1.0.0"
-	    }
-	  }
-	}';
+		// $data = $decoder->decodeFile('c:/xampp/htdocs/testify/src/app/Controller/Login/data.json');
 
-	$jsonValidator->validate($jsonResponse, $schema);
+		$errors = $validator->validate($data, 'c:/xampp/htdocs/testify/src/app/Controller/Login/schema.json');
 
-	$tf->assertTrue($jsonValidator->isValid(),'Test JSON Response');
+		if (count($errors) > 0) {
+		    $tf->assertTrue(false, 'JSON Validierung fehlgeschlagen');
+		}
+		else{
+			$tf->assertTrue(true, 'JSON Validierung gelungen');
+		}
+	}
+	catch(\Throwable $e){
+		$test = 123;
+	}
 });
 
 $tf->run(true);
