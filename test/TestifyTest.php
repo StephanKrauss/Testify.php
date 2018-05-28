@@ -1,7 +1,5 @@
 <?php
 
-require '../vendor/autoload.php';
-
 use Testify\Testify;
 
 $tf = new Testify("Testify test himself");
@@ -87,5 +85,3 @@ $tf->test("data set test", function($tf) use($test)
 	$tf->assert($test->assertInArray(3, $test->data->arr));
 	$tf->assert($test->assertNotInArray(9, $test->data->arr));
 });
-
-$tf();

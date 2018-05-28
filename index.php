@@ -3,9 +3,9 @@
 require 'vendor/autoload.php';
 require_once('src/container.php');
 
-	use Webmozart\Json\JsonDecoder;
-	use Webmozart\Json\JsonValidator;
-	use Webmozart\Json\ValidationFailedException;
+//use Webmozart\Json\JsonDecoder;
+//use Webmozart\Json\JsonValidator;
+//use Webmozart\Json\ValidationFailedException;
 
 use Testify\Testify;
 
@@ -47,33 +47,33 @@ $tf->test(__FILE__, function($tf) use($container)
     $tf->assertRegExpr("^([0-9]+)([a-z]+)$", '1235456987452sdfsdWECDsdfsd1', 'Test RegEx');
 });
 
-$tf->test(__FILE__, function($tf) use($container)
-{
-	/** @var $controller App\Controller\Login\LoginController */
-	// $controller = new App\Controller\Login\LoginController();
-	// $data = $controller->response();
-
-	try{
-		// $decoder = new JsonDecoder();
-		$validator = new JsonValidator();
-
-		$controller = new App\Controller\Login\LoginController();
-		$data = $controller->response();
-
-		// $data = $decoder->decodeFile('c:/xampp/htdocs/testify/src/app/Controller/Login/data.json');
-
-		$errors = $validator->validate($data, 'c:/xampp/htdocs/testify/src/app/Controller/Login/schema.json');
-
-		if (count($errors) > 0) {
-		    $tf->assertTrue(false, 'JSON Validierung fehlgeschlagen');
-		}
-		else{
-			$tf->assertTrue(true, 'JSON Validierung gelungen');
-		}
-	}
-	catch(\Throwable $e){
-		$test = 123;
-	}
-});
+//$tf->test(__FILE__, function($tf) use($container)
+//{
+//	/** @var $controller App\Controller\Login\LoginController */
+//	// $controller = new App\Controller\Login\LoginController();
+//	// $data = $controller->response();
+//
+//	try{
+//		// $decoder = new JsonDecoder();
+//		$validator = new JsonValidator();
+//
+//		$controller = new App\Controller\Login\LoginController();
+//		$data = $controller->response();
+//
+//		// $data = $decoder->decodeFile('c:/xampp/htdocs/testify/src/app/Controller/Login/data.json');
+//
+//		$errors = $validator->validate($data, 'c:/xampp/htdocs/testify/src/app/Controller/Login/schema.json');
+//
+//		if (count($errors) > 0) {
+//		    $tf->assertTrue(false, 'JSON Validierung fehlgeschlagen');
+//		}
+//		else{
+//			$tf->assertTrue(true, 'JSON Validierung gelungen');
+//		}
+//	}
+//	catch(\Throwable $e){
+//		$test = 123;
+//	}
+//});
 
 $tf->run(true);

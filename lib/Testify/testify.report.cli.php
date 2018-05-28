@@ -1,26 +1,21 @@
 <?php
-require 'helpers.php';
+$check = $suiteResults['fail'] === 0 ? 'pass' : 'fail';
 
-$result = $suiteResults['fail'] === 0 ? 'pass' : 'fail';
+$errorMessage = '';
 
-echo
-str_repeat('-', 80)."\n",
-" $title  [$result]\n";
+if($check == 'fail'){
+	foreach($cases as $fileName => $value){
+		$errorMessage .= 'Datei: '.$fileName."\n";
+		$errorMessage .= 'Fehleranzahl: '.$cases[$fileName]['pass']."\n";
 
-foreach($cases as $caseTitle => $case) {
-  echo
-	"\n".str_repeat('-', 80)."\n",
-	"Test: '$caseTitle'  {richtig: {$case['pass']} / falsch: {$case['fail']}}\n\n";
-
-	foreach ($case['tests'] as $test) {
-		echo
-		"[{$test['result']}] {$test['type']}()\n",
-		str_repeat(' ', 7)."line {$test['line']}, {$test['file']}\n",
-		str_repeat(' ', 7)."{$test['source']}\n";
+		for($i=0; $i < count($cases[$fileName]['tests']); $i++){
+			if($cases[$fileName]['tests'][$i]['result'] == 'fail'){
+				$errorMessage .= "Fehler: ".$cases[$fileName]['tests'][$i]['file']."\n";
+				$errorMessage .= "Zeile: ".$cases[$fileName]['tests'][$i]['line']."\n";
+				$errorMessage .= "Test: ".$cases[$fileName]['tests'][$i]['source']."\n #### \n";
+			}
+		}
 	}
-}
 
-echo
-str_repeat('=', 80)."\n",
-"Tests: [$result], {pass {$suiteResults['pass']} / fail {$suiteResults['fail']}}, ",
-percent($suiteResults)."% success\n";
+	echo $errorMessage;
+}

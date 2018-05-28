@@ -1,5 +1,5 @@
 <?php
-require 'helpers.php';
+include_once('helpers.php');
 ?><!DOCTYPE html>
 <html>
 	<head>

@@ -1,17 +1,17 @@
 <?php
 
-require '../vendor/autoload.php';
+// require '../vendor/autoload.php';
 
 use Testify\Testify;
 
-$tf = new Testify("Bla Test");
+$tf = new Testify();
 $test = new Testify("//");
 
 $tf->before(function($tf) use($test) {
 	$test->data->arr = array(1, 2, 3);
 });
 
-$tf->test("Pass/Fail test", function($tf) use($test)
+$tf->test(__FILE__, function($tf) use($test)
 {
 	$tf->assert(true, "To be sure that initial test pass !");
 	$tf->assertFalse(false);
@@ -22,7 +22,7 @@ $tf->test("Pass/Fail test", function($tf) use($test)
 	$tf->assertFalse($test->fail());
 });
 
-$tf->test("Basic assert test", function($tf) use($test)
+$tf->test(__FILE__, function($tf) use($test)
 {
 	$tf->assert($test->assert(true));
 	$tf->assert(!$test->assert(false));
@@ -31,7 +31,7 @@ $tf->test("Basic assert test", function($tf) use($test)
 	$tf->assertFalse(!$test->assert(true));
 });
 
-$tf->test("assertEquals/assertNotEquals test", function($tf) use($test)
+$tf->test(__FILE__, function($tf) use($test)
 {
 	$tf->assert($test->assertEquals(1, 1));
 	$tf->assert($test->assertEquals(-1337, '-1337'));
@@ -49,7 +49,7 @@ $tf->test("assertEquals/assertNotEquals test", function($tf) use($test)
 	$tf->assertFalse($test->assertNotEquals(1.0, 1));
 });
 
-$tf->test("assertSame/assertNotSame test", function($tf) use($test)
+$tf->test(__FILE__, function($tf) use($test)
 {
 	$tf->assert($test->assertSame(-1, -1));
 	$tf->assert($test->assertNotSame(-1, -1.0));
@@ -66,7 +66,7 @@ $tf->test("assertSame/assertNotSame test", function($tf) use($test)
 	$tf->assertFalse($test->assertSame(new \StdClass, (object)array()));
 });
 
-$tf->test("assertInArray/assertNotInArray test", function($tf) use($test)
+$tf->test(__FILE__, function($tf) use($test)
 {
 	$arr = array(1, 2, null, false, "1", "2");
 
@@ -81,11 +81,9 @@ $tf->test("assertInArray/assertNotInArray test", function($tf) use($test)
 	$tf->assertFalse($test->assertInArray(array(0), $arr));
 });
 
-$tf->test("data set test", function($tf) use($test)
+$tf->test(__FILE__, function($tf) use($test)
 {
 	$tf->assert($test->assertInArray(2, $test->data->arr));
 	$tf->assert($test->assertInArray(3, $test->data->arr));
 	$tf->assert($test->assertNotInArray(9, $test->data->arr));
 });
-
-$tf();

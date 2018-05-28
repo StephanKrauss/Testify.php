@@ -379,7 +379,7 @@ class Testify {
 
 		}
 		else {
-			include dirname(__FILE__) . '/testify.report.html.php';
+			include_once(dirname(__FILE__) . '/testify.report.html.php');
 
 			return $this;
 		}
