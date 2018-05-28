@@ -84,4 +84,5 @@ $tf->test("data set test", function($tf) use($test)
 	$tf->assert($test->assertInArray(2, $test->data->arr));
 	$tf->assert($test->assertInArray(3, $test->data->arr));
 	$tf->assert($test->assertNotInArray(9, $test->data->arr));
+	$tf->assertTrue(false, 'Ein Fehler');
 });
