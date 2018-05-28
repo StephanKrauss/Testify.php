@@ -148,9 +148,10 @@ class Testify {
             call_user_func_array($this->after, $arr);
         }
 
-		$this->report($htmlView);
+		$errorMessage = null;
+		$errorMessage = $this->report($htmlView);
 
-        return $this;
+        return $errorMessage;
     }
 
     /**
@@ -370,18 +371,20 @@ class Testify {
 			}
 
 			if($errors > 0){
-				include dirname(__FILE__) . '/testify.report.cli.php';
+				include_once(dirname(__FILE__) . '/testify.report.cli.php');
 
-				return $this;
+				if(!empty($errorMessage))
+					return $errorMessage;
+				else
+					return false;
 			}
 			else
-				echo $errors;
-
+				return false;
 		}
 		else {
 			include_once(dirname(__FILE__) . '/testify.report.html.php');
 
-			return $this;
+			return false;
 		}
     }
 

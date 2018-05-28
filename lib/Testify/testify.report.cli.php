@@ -1,12 +1,12 @@
 <?php
 $check = $suiteResults['fail'] === 0 ? 'pass' : 'fail';
 
-$errorMessage = '';
+$errorMessage = null;
 
 if($check == 'fail'){
 	foreach($cases as $fileName => $value){
-		$errorMessage .= 'Datei: '.$fileName."\n";
-		$errorMessage .= 'Fehleranzahl: '.$cases[$fileName]['pass']."\n";
+		$errorMessage .= 'Testdatei: '.$fileName."\n";
+		$errorMessage .= 'Fehleranzahl: '.$cases[$fileName]['fail']."\n ##### \n";
 
 		for($i=0; $i < count($cases[$fileName]['tests']); $i++){
 			if($cases[$fileName]['tests'][$i]['result'] == 'fail'){
@@ -16,6 +16,4 @@ if($check == 'fail'){
 			}
 		}
 	}
-
-	echo $errorMessage;
 }
