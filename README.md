@@ -26,7 +26,7 @@
                 },
                 "autoload": {
                     "psr-4" : {
-                        "StephanKrauss\\Testify" : "src"
+                        "StephanKrauss\\Testify\\" : "src"
                     }
                 }
             }
