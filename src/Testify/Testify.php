@@ -499,11 +499,4 @@ class Testify {
     }
 }
 
-/**
- * TestifyException class
- *
- */
-class TestifyException extends \Exception
-{
 
-}
